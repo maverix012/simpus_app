@@ -26,6 +26,13 @@ const routes = [{
   }, {
     path: '/program',
     component: () => import('../views/Program.vue')
+  },
+  {
+    path: '/surat',
+    component: () => import('../views/Surat.vue')
+  }, {
+    path: '/perpustakaan',
+    component: () => import('../views/Perpustakaan.vue')
   }, {
     path: '/pegawai',
     component: () => import('../views/Pegawai.vue')

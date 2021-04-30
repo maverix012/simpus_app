@@ -45,17 +45,17 @@ export default {
       {
         icon: "fas fa-stethoscope",
         text: "Poli Umum",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        component: () => import("./subpages/Pelayanan/PoliUmum"),
       },
       {
         icon: "fas fa-tooth",
         text: "Poli Gigi",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        component: () => import("./subpages/Pelayanan/PoliGigi"),
       },
       {
         icon: "pregnant_woman",
         text: "Poli KIA",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        component: () => import("./subpages/Pelayanan/PoliKIA"),
       },
       {
         icon: "fas fa-baby",
@@ -75,7 +75,12 @@ export default {
       {
         icon: "fas fa-pills",
         text: "Obat",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        component: () => import("./subpages/Pelayanan/Obat"),
+      },
+      {
+        icon: "fas fa-user",
+        text: "Pasien",
+        component: () => import("./subpages/Pelayanan/Pasien"),
       },
     ],
   }),

@@ -73,6 +73,16 @@ export default {
         icon: "",
       },
       {
+        nama: "Surat",
+        link: "surat",
+        icon: "",
+      },
+      {
+        nama: "Perpustakaan",
+        link: "perpustakaan",
+        icon: "",
+      },
+      {
         nama: "Settings",
         link: "settings",
         icon: "",

@@ -2,7 +2,24 @@
   <div>
     <v-container>
       <v-row>
-        <v-col v-for="data in charts" :key="data.length" cols="4">
+        <v-col v-for="data in 4" :key="data.length" cols="3">
+          <v-card class="mx-auto" max-width="344" outlined>
+            <v-list-item three-line>
+              <v-list-item-content>
+                <v-list-item-title class="headline mb-1">
+                  {{ data.nama }}
+                </v-list-item-title>
+              </v-list-item-content>
+
+              <v-list-item-avatar
+                tile
+                size="80"
+                color="grey"
+              ></v-list-item-avatar>
+            </v-list-item>
+          </v-card>
+        </v-col>
+        <v-col v-for="data in charts" :key="data.length" cols="3">
           <v-card>
             <v-card-title primary-title> {{ data.title }} </v-card-title>
             <component
