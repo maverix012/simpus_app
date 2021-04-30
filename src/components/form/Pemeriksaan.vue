@@ -1,3 +1,3 @@
 <template>
-  <v-form> </v-form>
+  <v-form></v-form>
 </template>

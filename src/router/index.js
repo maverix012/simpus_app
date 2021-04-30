@@ -48,6 +48,10 @@ const routes = [{
     path: '/pasien',
     component: () => import('../views/Pasien.vue')
   },
+  // {
+  //   path: '/Home',
+  //   component: () => import('../views/Home.vue')
+  // },
 
 
 ]
