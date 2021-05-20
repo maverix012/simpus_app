@@ -19,4 +19,3 @@ export const REMOVE_PASIEN = (state, pasien) => {
         return x.id != pasien.id
     })
 }
-

@@ -48,6 +48,11 @@ export default {
         icon: "",
       },
       {
+        nama: "Informasi",
+        link: "informasi",
+        icon: "",
+      },
+      {
         nama: "Keuangan",
         link: "keuangan",
         icon: "",
@@ -63,7 +68,7 @@ export default {
         icon: "",
       },
       {
-        nama: "Pegawai",
+        nama: "Kepegawaian",
         link: "pegawai",
         icon: "",
       },
@@ -80,6 +85,16 @@ export default {
       {
         nama: "Perpustakaan",
         link: "perpustakaan",
+        icon: "",
+      },
+      {
+        nama: "Bangunan",
+        link: "bangunan",
+        icon: "",
+      },
+      {
+        nama: "Master Data",
+        link: "master_data",
         icon: "",
       },
       {

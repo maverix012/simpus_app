@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <v-row>
-        <v-col v-for="data in charts" :key="data.length" cols="4">
+        <v-col v-for="data in charts" :key="data.length" cols="3">
           <v-card>
             <v-card-title primary-title> {{ data.title }} </v-card-title>
             <component

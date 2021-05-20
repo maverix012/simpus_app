@@ -85,12 +85,14 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template item.actions="{ item }">
+    <template v-slot:[`item.actions`]="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)">
         fas fa-notes-medical
       </v-icon>
-      <v-icon small class="mr-2" @click="editItem(item)"> fas fa-edit </v-icon>
-      <v-icon small @click="deleteItem(item)"> fas fa-trash </v-icon>
+      <v-icon small class="mr-2" @click="editItem(item)">
+        fas fa-volume-up
+      </v-icon>
+      <!-- <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon> -->
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>

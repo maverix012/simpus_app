@@ -48,10 +48,27 @@ const routes = [{
     path: '/pasien',
     component: () => import('../views/Pasien.vue')
   },
-  // {
-  //   path: '/Home',
-  //   component: () => import('../views/Home.vue')
-  // },
+  {
+    path: '/informasi',
+    component: () => import('../views/Informasi.vue')
+  },
+  {
+    path: '/bangunan',
+    component: () => import('../views/Bangunan.vue')
+  },
+  {
+    path: '/master_data',
+    component: () => import('../views/Bangunan.vue')
+  },
+
+  {
+    path: '/konfirmasi/:id',
+    component: () => import('../views/Konfirmasi.vue')
+  },
+  {
+    path: '/404',
+    component: () => import('../views/404.vue')
+  },
 
 
 ]

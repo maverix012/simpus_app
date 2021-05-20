@@ -2,18 +2,19 @@
   <v-form ref="form" v-model="valid" lazy-validation>
     <v-card-text>
       <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="E-mail"
-        prepend-icon="email"
+        v-model="password"
+        :rules="passwordRules"
+        label="Create Password"
+        :append-icon="value ? 'visibility' : 'visibility_off'"
+        @click:append="() => (value = !value)"
+        :type="value ? 'password' : 'text'"
         required
       />
 
       <v-text-field
         v-model="password"
         :rules="passwordRules"
-        label="Password"
-        prepend-icon="lock"
+        label="Confirm Password"
         :append-icon="value ? 'visibility' : 'visibility_off'"
         @click:append="() => (value = !value)"
         :type="value ? 'password' : 'text'"
@@ -29,7 +30,7 @@
         dark
         type="submit"
       >
-        Masuk
+        Confirm
       </v-btn>
     </v-card-text>
   </v-form>

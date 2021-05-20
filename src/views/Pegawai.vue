@@ -28,44 +28,29 @@
   </v-main>
 </template>
 <script>
-import Pelayanan from "./subpages/Dashboard/Pelayanan";
+import Staf from "./subpages/Pegawai/Staf";
 export default {
   components: {
-    Pelayanan,
+    Staf,
   },
   data: () => ({
     drawer: null,
-    selected: "Pelayanan",
+    selected: "Staf",
     menus: [
       {
-        icon: "fas fa-bed",
-        text: "Rawat Inap",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        icon: "fas fa-user-alt",
+        text: "Staf",
+        component: () => import("./subpages/Pegawai/Staf"),
       },
       {
-        icon: "fas fa-stethoscope",
-        text: "Poli Umum",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        icon: "fas fa-user-nurse",
+        text: "Perawat",
+        component: () => import("./subpages/Pegawai/Staf"),
       },
       {
-        icon: "fas fa-tooth",
-        text: "Poli Gigi",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "pregnant_woman",
-        text: "Poli KIA",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "fas fa-baby",
-        text: "Poli MTBS",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "fas fa-baby",
-        text: "Poli Konsultasi",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        icon: "fas fa-user-md",
+        text: "Dokter",
+        component: () => import("./subpages/Pegawai/Staf"),
       },
     ],
   }),

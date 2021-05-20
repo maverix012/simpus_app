@@ -1,68 +1,28 @@
 <template>
   <v-form ref="form" @submit.prevent="store" lazy-validation>
     <v-card-text>
-      <v-text-field
+      <v-autocomplete
         v-model="data.nik"
         prepend-icon="fas fa-id-card"
-        label="NIK"
+        label="Pasien"
         required
       />
-      <v-text-field
+      <v-select
+        v-model="name"
+        prepend-icon="fas fa-briefcase-medical"
+        label="Poliklinik"
+        required
+      />
+      <v-select
         v-model="data.name"
-        prepend-icon="fas fa-user"
-        label="Nama"
+        prepend-icon="fas fa-user-md"
+        label="Dokter"
         required
       />
-      <v-menu
-        ref="menu"
-        v-model="menu"
-        :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-text-field
-            v-model="date"
-            label="Tanggal Lahir"
-            prepend-icon="mdi-calendar"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          ref="picker"
-          v-model="date"
-          :max="new Date().toISOString().substr(0, 10)"
-          min="1950-01-01"
-          @change="save"
-        ></v-date-picker>
-      </v-menu>
-      <v-text-field
+      <v-select
         v-model="name"
-        prepend-icon="fas fa-map-marker-alt"
-        label="Tempat Lahir"
-        required
-      />
-      <v-text-field
-        v-model="name"
-        prepend-icon="fas fa-venus-mars"
-        label="Jenis Kelamin"
-        required
-      />
-      <v-text-field
-        v-model="name"
-        prepend-icon="fas fa-tint"
-        label="Golongan Darah"
-        required
-      />
-
-      <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="E-mail"
-        prepend-icon="email"
+        prepend-icon="fas fa-credit-card"
+        label="Layanan"
         required
       />
 

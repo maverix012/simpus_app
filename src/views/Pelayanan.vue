@@ -1,88 +1,30 @@
 <template>
   <v-main>
-    <v-navigation-drawer v-model="drawer" app>
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in menus"
-          :key="i"
-          @click="selected = item.component"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ item.text }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-
+    <v-app-bar app flat>
       <v-toolbar-title>Pelayanan</v-toolbar-title>
     </v-app-bar>
-
-    <component v-bind="menus" :is="selected" />
+    <v-container>
+      <v-row>
+        <v-col cols="12">
+          <v-card>
+            <form-pendaftaran />
+          </v-card>
+        </v-col>
+        <v-col>
+          <table-poli />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-main>
 </template>
 <script>
-import Pelayanan from "./subpages/Dashboard/Pelayanan";
+import FormPendaftaran from "../components/form/Pendaftaran";
+import TablePoli from "../components/table/Poli";
 export default {
   components: {
-    Pelayanan,
+    FormPendaftaran,
+    TablePoli,
   },
-  data: () => ({
-    drawer: null,
-    selected: "Pelayanan",
-    menus: [
-      {
-        icon: "fas fa-bed",
-        text: "Rawat Inap",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "fas fa-stethoscope",
-        text: "Poli Umum",
-        component: () => import("./subpages/Pelayanan/PoliUmum"),
-      },
-      {
-        icon: "fas fa-tooth",
-        text: "Poli Gigi",
-        component: () => import("./subpages/Pelayanan/PoliGigi"),
-      },
-      {
-        icon: "pregnant_woman",
-        text: "Poli KIA",
-        component: () => import("./subpages/Pelayanan/PoliKIA"),
-      },
-      {
-        icon: "fas fa-baby",
-        text: "Poli MTBS",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "wc",
-        text: "Poli Konsultasi",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "biotech",
-        text: "Laboratorium",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "fas fa-pills",
-        text: "Obat",
-        component: () => import("./subpages/Pelayanan/Obat"),
-      },
-      {
-        icon: "fas fa-user",
-        text: "Pasien",
-        component: () => import("./subpages/Pelayanan/Pasien"),
-      },
-    ],
-  }),
+  data: () => ({}),
 };
-</script>s
+</script>

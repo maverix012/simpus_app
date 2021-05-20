@@ -10,12 +10,7 @@
         <v-toolbar-title>Obat</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on, attrs }">
-            <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
-              New Item
-            </v-btn>
-          </template>
+        <v-dialog v-model="dialog" persistent max-width="500px">
           <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
@@ -51,9 +46,14 @@
         </v-dialog>
       </v-toolbar>
     </template>
-    <template item.actions="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)"> fas fa-edit </v-icon>
-      <v-icon small @click="deleteItem(item)"> fas fa-trash </v-icon>
+    <template v-slot:[`item.actions`]="{ item }">
+      <v-icon small class="mr-2" @click="editItem(item)">
+        fas fa-notes-medical
+      </v-icon>
+      <v-icon small class="mr-2" @click="editItem(item)">
+        fas fa-volume-up
+      </v-icon>
+      <!-- <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon> -->
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>

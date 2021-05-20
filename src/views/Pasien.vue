@@ -5,7 +5,7 @@
       <v-sheet color="grey lighten-4" class="pa-4">
         <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
 
-        <div>john@vuetifyjs.com</div>
+        <div>Jhon Doe</div>
       </v-sheet>
 
       <v-divider></v-divider>
@@ -34,31 +34,31 @@
 </template>
 
 <script>
-import Pelayanan from "./subpages/Dashboard/Pelayanan";
+import TiketAntrian from "./subpages/Pasien/TiketAntrian";
 
 export default {
   components: {
-    Pelayanan,
+    TiketAntrian,
   },
   data: () => ({
     cards: ["Today", "Yesterday"],
     drawer: null,
-    selected: "Pelayanan",
+    selected: "TiketAntrian",
     menus: [
       {
         icon: "fas fa-ticket-alt",
         text: "Antrian",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        component: () => import("./subpages/Pasien/TiketAntrian"),
       },
       {
         icon: "fas fa-file-medical",
         text: "Rekam Medis",
-        component: () => import("./subpages/RekamMedis"),
+        component: () => import("./subpages/Pasien/RekamMedis"),
       },
       {
         icon: "fas fa-id-card",
         text: "Profil",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        component: () => import("./subpages/Pasien/Profil"),
       },
     ],
   }),
