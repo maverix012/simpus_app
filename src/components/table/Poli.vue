@@ -54,13 +54,27 @@
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">
-        fas fa-notes-medical
-      </v-icon>
-      <v-icon small class="mr-2" @click="editItem(item)">
+      <v-menu top offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon small class="mr-2" v-bind="attrs" v-on="on" color="blue">
+            fas fa-notes-medical
+          </v-icon>
+        </template>
+
+        <v-list>
+          <v-list-item
+            v-for="(item, index) in items"
+            :key="index"
+            @click="editItem(item)"
+          >
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <v-icon small class="mr-2" @click="editItem(item)" color="red">
         fas fa-volume-up
       </v-icon>
-      <!-- <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon> -->
     </template>
     <template v-slot:no-data>
       <v-btn color="primary" @click="initialize"> Reset </v-btn>
@@ -76,7 +90,14 @@ export default {
   data: () => ({
     dialog: false,
     dialogDelete: false,
+    items: [
+      { title: "Click Me" },
+      { title: "Click Me" },
+      { title: "Click Me" },
+      { title: "Click Me 2" },
+    ],
     headers: [
+      { text: "Actions", value: "actions", sortable: false },
       {
         text: "No. RM",
         align: "start",
@@ -89,7 +110,6 @@ export default {
       { text: "Gol Darah", value: "protein" },
       { text: "Layanan", value: "protein" },
       { text: "Status", value: "protein" },
-      { text: "Actions", value: "actions", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
