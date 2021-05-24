@@ -63,7 +63,7 @@
 
         <v-list>
           <v-list-item
-            v-for="(item, index) in items"
+            v-for="(item, index) in menus"
             :key="index"
             @click="editItem(item)"
           >
@@ -90,7 +90,7 @@ export default {
   data: () => ({
     dialog: false,
     dialogDelete: false,
-    items: [
+    menus: [
       { title: "Click Me" },
       { title: "Click Me" },
       { title: "Click Me" },
