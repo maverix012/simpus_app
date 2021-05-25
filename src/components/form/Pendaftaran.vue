@@ -2,28 +2,31 @@
   <v-form ref="form" @submit.prevent="store" lazy-validation>
     <v-card-text>
       <v-autocomplete
-        v-model="data.nik"
+        v-model="data.no_rm"
         prepend-icon="fas fa-id-card"
         label="Pasien"
         required
       />
       <v-select
-        v-model="name"
+        v-model="data.poli"
         prepend-icon="fas fa-briefcase-medical"
         label="Poliklinik"
         required
+        :items="dataSelect.Poli"
       />
       <v-select
-        v-model="data.name"
+        v-model="data.dokter"
         prepend-icon="fas fa-user-md"
         label="Dokter"
         required
+        :items="dataSelect.Dokter"
       />
       <v-select
-        v-model="name"
+        v-model="data.layanan"
         prepend-icon="fas fa-credit-card"
         label="Layanan"
         required
+        :items="dataSelect.Layanan"
       />
 
       <v-btn
@@ -51,8 +54,19 @@
 export default {
   data: () => ({
     data: {
-      name: "",
-      email: "",
+      no_rm: "",
+      poli: "",
+      dokter: "",
+      layanan: "",
+    },
+    dataSelect: {
+      Poli: [
+        { text: "Poli Umum" },
+        { text: "Poli Gigi" },
+        { text: "Poli Kia" },
+      ],
+      Dokter: [{}],
+      Layanan: [{ text: "UMUM" }, { text: "BPJS" }],
     },
     notification: {
       snackbar: false,

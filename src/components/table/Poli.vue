@@ -72,7 +72,7 @@
         </v-list>
       </v-menu>
 
-      <v-icon small class="mr-2" @click="editItem(item)" color="red">
+      <v-icon small class="mr-2" @click="call(item)" color="red">
         fas fa-volume-up
       </v-icon>
     </template>
@@ -264,6 +264,9 @@ export default {
         this.desserts.push(this.editedItem);
       }
       this.close();
+    },
+    call(item) {
+      console.log("hello world", item);
     },
   },
 };

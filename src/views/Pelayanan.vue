@@ -10,24 +10,21 @@
             <v-card-subtitle>
               <v-dialog v-model="dialog" persistent max-width="600px">
                 <template v-slot:activator="{ on, dialog }">
-                  <!-- <v-tooltip v-on="on" bottom>
-                    <template v-slot:activator="{ on, tooltip }"> -->
-
-                  <v-icon
+                  <v-btn
                     color="teal accent-3"
-                    v-bind="{ dialog }"
+                    v-bind="dialog"
                     v-on="on"
-                    class="mr-2"
-                    >fas fa-user-plus</v-icon
+                    outlined
+                    dark
                   >
-
-                  <!-- </template>
-                    <span>Pasien Baru</span>
-                  </v-tooltip> -->
+                    <v-icon dark>fas fa-user-plus</v-icon>
+                  </v-btn>
                 </template>
                 <v-card>
                   <v-toolbar color="teal accent-3">
-                    <v-icon dark @click="dialog = false">mdi-close</v-icon>
+                    <v-btn icon outlined color="white">
+                      <v-icon @click="dialog = false">mdi-close</v-icon>
+                    </v-btn>
                   </v-toolbar>
 
                   <v-card-text>
