@@ -76,9 +76,9 @@
         fas fa-volume-up
       </v-icon>
     </template>
-    <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize"> Reset </v-btn>
-    </template>
+    <v-snackbar v-model="notification.snackbar" :timeout="notification.timeout">
+      {{ notification.massage }}
+    </v-snackbar>
   </v-data-table>
 </template>
 <script>
@@ -90,6 +90,11 @@ export default {
   data: () => ({
     dialog: false,
     dialogDelete: false,
+    notification: {
+      snackbar: false,
+      timeout: 5000,
+      massage: null,
+    },
     menus: [
       { title: "Click Me" },
       { title: "Click Me" },
@@ -266,7 +271,8 @@ export default {
       this.close();
     },
     call(item) {
-      console.log("hello world", item);
+      this.notification.snackbar = true;
+      this.notification.massage = "Panggilan Ke-" + item.lenght;
     },
   },
 };
