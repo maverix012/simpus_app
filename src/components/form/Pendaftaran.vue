@@ -2,33 +2,34 @@
   <v-form ref="form" @submit.prevent="store" lazy-validation>
     <v-card-text>
       <v-autocomplete
-        v-model="data.no_rm"
+        v-model="input.no_rm"
         prepend-icon="fas fa-id-card"
         label="Pasien"
         required
       />
       <v-select
-        v-model="data.poli"
+        v-model="input.poli"
         prepend-icon="fas fa-briefcase-medical"
+        :rules="rules.poli"
         label="Poliklinik"
         required
         :items="dataSelect.Poli"
       />
       <v-select
-        v-model="data.dokter"
+        v-model="input.dokter"
         prepend-icon="fas fa-user-md"
         label="Dokter"
         required
         :items="dataSelect.Dokter"
       />
       <v-select
-        v-model="data.layanan"
+        v-model="input.layanan"
         prepend-icon="fas fa-credit-card"
+        :rules="rules.layanan"
         label="Layanan"
         required
         :items="dataSelect.Layanan"
       />
-
       <v-btn
         block
         rounded
@@ -53,20 +54,22 @@
 <script>
 export default {
   data: () => ({
-    data: {
+    input: {
       no_rm: "",
       poli: "",
       dokter: "",
       layanan: "",
     },
     dataSelect: {
-      Poli: [
-        { text: "Poli Umum" },
-        { text: "Poli Gigi" },
-        { text: "Poli Kia" },
-      ],
+      Poli: [{ text: "Umum" }, { text: "Gigi" }, { text: "KIA" }],
       Dokter: [{}],
-      Layanan: [{ text: "UMUM" }, { text: "BPJS" }],
+      Layanan: [{ text: "Umum" }, { text: "BPJS" }],
+    },
+    rules: {
+      no_rm: [(v) => !!v || "No RM Tidak Boleh Kosong"],
+      poli: [(v) => !!v || "Poli Tidak Boleh Kosong"],
+      dokter: [(v) => !!v || "Dokter Tidak Boleh Kosong"],
+      layanan: [(v) => !!v || "Layanan Tidak Boleh Kosong"],
     },
     notification: {
       snackbar: false,
@@ -76,17 +79,6 @@ export default {
     valid: true,
     date: null,
     menu: false,
-
-    rules: {
-      email: [
-        (v) => !!v || "E-mail tidak boleh kosong",
-        (v) => /.+@.+\..+/.test(v) || "E-mail harus benar",
-      ],
-    },
-    emailRules: [
-      (v) => !!v || "E-mail tidak boleh kosong",
-      (v) => /.+@.+\..+/.test(v) || "E-mail harus benar",
-    ],
   }),
 
   watch: {
@@ -96,10 +88,24 @@ export default {
   },
   methods: {
     store() {
-      this.$refs.form.validate();
-      this.notification.snackbar = true;
-      this.notification.massage =
-        "Data diri anda telah berhasil ditambahkan silahkan cek email anda";
+      if (this.$refs.form.validate() == true) {
+        // localStorage.setItem("antrian", JSON.stringify(this.input));
+        this.$store.dispatch("store", { select: "antrian", input: this.input });
+        this.notification.snackbar = true;
+        this.notification.massage =
+          "Anda telah berhasil mendaftar ke Poli" +
+          " " +
+          this.input.poli +
+          " " +
+          "dengan layanan" +
+          " " +
+          this.input.layanan;
+        this.$refs.form.reset();
+      } else {
+        this.notification.snackbar = true;
+        this.notification.massage =
+          "Data harus diisi dengan benar / data tidak boleh kosong";
+      }
     },
     save(date) {
       this.$refs.menu.save(date);

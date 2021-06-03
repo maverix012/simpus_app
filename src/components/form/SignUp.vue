@@ -1,14 +1,15 @@
 <template>
-  <v-form ref="form" @submit.prevent="store" lazy-validation>
+  <v-form ref="form" @submit.prevent="store()" lazy-validation>
     <v-card-text>
       <v-text-field
-        v-model="data.nik"
+        v-model="input.nik"
         prepend-icon="fas fa-id-card"
         label="NIK"
         required
       />
       <v-text-field
-        v-model="data.name"
+        v-model="input.nama"
+        :rules="rules.nama"
         prepend-icon="fas fa-user"
         label="Nama"
         required
@@ -23,7 +24,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-text-field
-            v-model="date"
+            v-model="input.dob"
             label="Tanggal Lahir"
             prepend-icon="mdi-calendar"
             readonly
@@ -33,34 +34,36 @@
         </template>
         <v-date-picker
           ref="picker"
-          v-model="date"
+          v-model="input.dob"
           :max="new Date().toISOString().substr(0, 10)"
           min="1950-01-01"
           @change="save"
         ></v-date-picker>
       </v-menu>
       <v-text-field
-        v-model="name"
+        v-model="input.pob"
         prepend-icon="fas fa-map-marker-alt"
         label="Tempat Lahir"
         required
       />
-      <v-text-field
-        v-model="name"
+      <v-select
+        v-model="input.jk"
+        :items="dataSelect.jenis_kelamin"
         prepend-icon="fas fa-venus-mars"
         label="Jenis Kelamin"
         required
       />
-      <v-text-field
-        v-model="name"
+      <v-select
+        v-model="input.gol_darah"
+        :items="dataSelect.gol_darah"
         prepend-icon="fas fa-tint"
         label="Golongan Darah"
         required
       />
 
       <v-text-field
-        v-model="email"
-        :rules="emailRules"
+        v-model="input.email"
+        :rules="rules.email"
         label="E-mail"
         prepend-icon="email"
         required
@@ -90,9 +93,41 @@
 <script>
 export default {
   data: () => ({
-    data: {
-      name: "",
+    dataSelect: {
+      jenis_kelamin: ["L", "P"],
+      gol_darah: ["A", "B", "AB", "O"],
+    },
+    rules: {
+      nama: [(v) => !!v || "Nama Tidak Boleh Kosong"],
+      email: [
+        (v) => !!v || "E-mail tidak boleh kosong",
+        (v) => /.+@.+\..+/.test(v) || "E-mail harus benar",
+      ],
+    },
+    input: {
+      nik: null,
+      kk: null,
+      nama: "",
+      dob: null,
+      pob: "",
+      gol_darah: "",
       email: "",
+      alamat: {
+        jln: "",
+        rt: null,
+        rw: null,
+        kel_des: "",
+        kecamatan: "",
+        kabupaten: "",
+        provinsi: "",
+      },
+      pendidikan: {
+        sd: "",
+        smp: "",
+        sma: "",
+        diploma: "",
+        sarjana: "",
+      },
     },
     notification: {
       snackbar: false,
@@ -102,17 +137,6 @@ export default {
     valid: true,
     date: null,
     menu: false,
-
-    rules: {
-      email: [
-        (v) => !!v || "E-mail tidak boleh kosong",
-        (v) => /.+@.+\..+/.test(v) || "E-mail harus benar",
-      ],
-    },
-    emailRules: [
-      (v) => !!v || "E-mail tidak boleh kosong",
-      (v) => /.+@.+\..+/.test(v) || "E-mail harus benar",
-    ],
   }),
 
   watch: {
@@ -122,10 +146,18 @@ export default {
   },
   methods: {
     store() {
-      this.$refs.form.validate();
-      this.notification.snackbar = true;
-      this.notification.massage =
-        "Data diri anda telah berhasil ditambahkan silahkan cek email anda";
+      if (this.$refs.form.validate() == true) {
+        // localStorage.setItem("pasien", this.input);
+        this.$store.dispatch("store", { select: "pasien", input: this.input });
+        this.notification.snackbar = true;
+        this.notification.massage =
+          "Data diri anda telah berhasil ditambahkan silahkan cek email anda";
+        this.$refs.form.reset();
+      } else {
+        this.notification.snackbar = true;
+        this.notification.massage =
+          "Data harus diisi dengan benar / data tidak boleh kosong";
+      }
     },
     save(date) {
       this.$refs.menu.save(date);
