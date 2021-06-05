@@ -12,15 +12,15 @@ export default new Vuex.Store({
     },
     mutations: {
         getData(state, {
-            input,
-            select
+            select,
+            input
         }) {
             switch (select) {
                 case "pasien":
-                    state.pasien = input
+                    state.pasien = JSON.parse(localStorage.getItem(input))
                     break
                 case "antrian":
-                    state.antrian = input
+                    state.antrian = JSON.parse(localStorage.getItem(input))
                     break
             }
         },
@@ -38,7 +38,12 @@ export default new Vuex.Store({
                     localStorage.setItem('antrian', JSON.stringify(state.antrian))
                     break
             }
+
         },
+        removeData(state, input) {
+            state.pasien.splice(state.pasien.indexOf(input), 1)
+            localStorage.setItem('pasien', JSON.stringify(state.antrian))
+        }
     },
     actions: {
         index({
@@ -64,5 +69,12 @@ export default new Vuex.Store({
             })
         }
     },
-    getters: {}
+    getters: {
+        allPasien: state => {
+            state.pasien
+        },
+        allAntrian: state => {
+            state.antrian
+        }
+    }
 })

@@ -147,8 +147,10 @@ export default {
   methods: {
     store() {
       if (this.$refs.form.validate() == true) {
-        // localStorage.setItem("pasien", this.input);
-        this.$store.dispatch("store", { select: "pasien", input: this.input });
+        this.$store.dispatch("store", {
+          select: "pasien",
+          input: { ...this.input },
+        });
         this.notification.snackbar = true;
         this.notification.massage =
           "Data diri anda telah berhasil ditambahkan silahkan cek email anda";

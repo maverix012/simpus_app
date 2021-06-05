@@ -86,11 +86,14 @@ export default {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     },
   },
+
   methods: {
-    store() {
+    async store() {
       if (this.$refs.form.validate() == true) {
-        // localStorage.setItem("antrian", JSON.stringify(this.input));
-        this.$store.dispatch("store", { select: "antrian", input: this.input });
+        this.$store.dispatch("store", {
+          select: "antrian",
+          input: { ...this.input },
+        });
         this.notification.snackbar = true;
         this.notification.massage =
           "Anda telah berhasil mendaftar ke Poli" +

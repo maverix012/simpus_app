@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="pasien"
+    :items="antrian"
     sort-by="no_rm"
     class="elevation-1"
   >
@@ -78,10 +78,9 @@
   </v-data-table>
 </template>
 <script>
-import { mapState } from "vuex";
-
 export default {
   data: () => ({
+    antrian: [],
     dialog: false,
     dialogDelete: false,
     notification: {
@@ -103,15 +102,14 @@ export default {
         sortable: false,
         value: "name",
       },
-      { text: "Poli", align: "start", value: "calories" },
+      { text: "Poli", align: "start", value: "poli" },
       { text: "NIK", align: "start", value: "calories" },
       { text: "Nama", value: "fat" },
       { text: "JK", value: "carbs" },
       { text: "Gol Darah", value: "protein" },
-      { text: "Layanan", value: "protein" },
+      { text: "Layanan", value: "layanan" },
       { text: "Status", value: "protein" },
     ],
-    pasien: [],
     editedIndex: -1,
     editedItem: {
       // name: "",
@@ -130,7 +128,6 @@ export default {
   }),
 
   computed: {
-    ...mapState(["antrian"]),
     formTitle() {
       return this.editedIndex === -1 ? "Kunjungan" : "Pemeriksaan";
     },
