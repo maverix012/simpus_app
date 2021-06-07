@@ -4,26 +4,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        pasien: [],
-        antrian: [],
-        pegawai: [],
-        dokter: [],
-        perawat: []
+        pasien: localStorage.getItem("pasien") ? JSON.parse(localStorage.getItem("pasien")) : [],
+        antrian: localStorage.getItem("antrian") ? JSON.parse(localStorage.getItem("antrian")) : [],
+        pegawai: localStorage.getItem("pegawai") ? JSON.parse(localStorage.getItem("pegawai")) : [],
+        dokter: localStorage.getItem("dokter") ? JSON.parse(localStorage.getItem("dokter")) : [],
+        perawat: localStorage.getItem("perawat") ? JSON.parse(localStorage.getItem("perawat")) : [],
+        poli: localStorage.getItem("poli") ? JSON.parse(localStorage.getItem("poli")) : [],
+        ruang_ranap: localStorage.getItem("ruang_ranap") ? JSON.parse(localStorage.getItem("ruang_ranap")) : [],
     },
     mutations: {
-        getData(state, {
-            select,
-            input
-        }) {
-            switch (select) {
-                case "pasien":
-                    state.pasien = JSON.parse(localStorage.getItem(input))
-                    break
-                case "antrian":
-                    state.antrian = JSON.parse(localStorage.getItem(input))
-                    break
-            }
-        },
+        // getData(state) {
+        //     state.pasien = JSON.parse(localStorage.getItem("pasien"))
+        //     state.antrian = JSON.parse(localStorage.getItem("antrian"))
+        //     state.dokter = JSON.parse(localStorage.getItem("dokter"))
+        //     state.pegawai = JSON.parse(localStorage.getItem("pegawai"))
+        //     state.perawat = JSON.parse(localStorage.getItem("perawat"))
+        //     state.poli = JSON.parse(localStorage.getItem("poli"))
+        //     state.ruang_ranap = JSON.parse(localStorage.getItem("ruang_ranap"))
+        // },
         addData(state, {
             input,
             select
@@ -36,6 +34,18 @@ export default new Vuex.Store({
                 case "antrian":
                     state.antrian.push(input)
                     localStorage.setItem('antrian', JSON.stringify(state.antrian))
+                    break
+                case "dokter":
+                    state.dokter.push(input)
+                    localStorage.setItem('dokter', JSON.stringify(state.dokter))
+                    break
+                case "pegawai":
+                    state.pegawai.push(input)
+                    localStorage.setItem('pegawai', JSON.stringify(state.pegawai))
+                    break
+                case "perawat":
+                    state.perawat.push(input)
+                    localStorage.setItem('perawat', JSON.stringify(state.perawat))
                     break
             }
 
@@ -67,14 +77,21 @@ export default new Vuex.Store({
                 select: select,
                 input: input
             })
-        }
+        },
+        updated() {
+
+        },
+        delete() {
+
+        },
+        syncAPI() {}
     },
     getters: {
-        allPasien: state => {
-            state.pasien
+        pasien: state => {
+            return state.pasien
         },
-        allAntrian: state => {
-            state.antrian
+        antrian: state => {
+            return state.antrian
         }
     }
 })

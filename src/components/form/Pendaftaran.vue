@@ -2,10 +2,14 @@
   <v-form ref="form" @submit.prevent="store" lazy-validation>
     <v-card-text>
       <v-autocomplete
-        v-model="input.no_rm"
+        v-model="input.pasien"
         prepend-icon="fas fa-id-card"
         label="Pasien"
         required
+        return-object
+        :items="pasien"
+        item-text="nik"
+        item-value="nik"
       />
       <v-select
         v-model="input.poli"
@@ -52,10 +56,11 @@
   </v-form>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   data: () => ({
     input: {
-      no_rm: "",
+      pasien: "",
       poli: "",
       dokter: "",
       layanan: "",
@@ -85,6 +90,10 @@ export default {
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     },
+  },
+
+  computed: {
+    ...mapGetters(["pasien"]),
   },
 
   methods: {

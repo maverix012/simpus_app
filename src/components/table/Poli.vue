@@ -18,7 +18,7 @@
           persistent
           max-width="500px"
         >
-          <v-card>
+          <!-- <v-card>
             <v-card-title>
               <span class="headline">{{ formTitle }}</span>
             </v-card-title>
@@ -28,7 +28,7 @@
               <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
               <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
             </v-card-actions>
-          </v-card>
+          </v-card> -->
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
@@ -78,9 +78,9 @@
   </v-data-table>
 </template>
 <script>
+import { mapGetters } from "vuex";
 export default {
   data: () => ({
-    antrian: [],
     dialog: false,
     dialogDelete: false,
     notification: {
@@ -100,13 +100,13 @@ export default {
         text: "No. RM",
         align: "start",
         sortable: false,
-        value: "name",
+        value: "pasien.no_rm",
       },
       { text: "Poli", align: "start", value: "poli" },
-      { text: "NIK", align: "start", value: "calories" },
-      { text: "Nama", value: "fat" },
-      { text: "JK", value: "carbs" },
-      { text: "Gol Darah", value: "protein" },
+      { text: "NIK", align: "start", value: "pasien.nik" },
+      { text: "Nama", value: "pasien.nama" },
+      { text: "JK", value: "pasien.jk" },
+      { text: "Gol Darah", value: "pasien.gol_darah" },
       { text: "Layanan", value: "layanan" },
       { text: "Status", value: "protein" },
     ],
@@ -128,6 +128,7 @@ export default {
   }),
 
   computed: {
+    ...mapGetters(["antrian"]),
     formTitle() {
       return this.editedIndex === -1 ? "Kunjungan" : "Pemeriksaan";
     },
@@ -144,22 +145,19 @@ export default {
 
   methods: {
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.antrian.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.antrian.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
-
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
+      this.antrian.splice(this.editedIndex, 1);
       this.closeDelete();
     },
-
     close() {
       this.dialog = false;
       this.$nextTick(() => {
@@ -167,7 +165,6 @@ export default {
         this.editedIndex = -1;
       });
     },
-
     closeDelete() {
       this.dialogDelete = false;
       this.$nextTick(() => {
@@ -175,12 +172,11 @@ export default {
         this.editedIndex = -1;
       });
     },
-
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.antrian[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.antrian.push(this.editedItem);
       }
       this.close();
     },

@@ -28,29 +28,29 @@
   </v-main>
 </template>
 <script>
-import Staf from "./subpages/Pegawai/Staf";
+import Staff from "./subpages/Pegawai/Staff";
 export default {
   components: {
-    Staf,
+    Staff,
   },
   data: () => ({
     drawer: null,
-    selected: "Staf",
+    selected: "Staff",
     menus: [
       {
         icon: "fas fa-user-alt",
-        text: "Staf",
-        component: () => import("./subpages/Pegawai/Staf"),
+        text: "Staff",
+        component: () => import("./subpages/Pegawai/Staff"),
       },
       {
         icon: "fas fa-user-nurse",
         text: "Perawat",
-        component: () => import("./subpages/Pegawai/Staf"),
+        component: () => import("./subpages/Pegawai/Perawat"),
       },
       {
         icon: "fas fa-user-md",
         text: "Dokter",
-        component: () => import("./subpages/Pegawai/Staf"),
+        component: () => import("./subpages/Pegawai/Dokter"),
       },
     ],
   }),
