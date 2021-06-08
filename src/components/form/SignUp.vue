@@ -8,10 +8,16 @@
         required
       />
       <v-text-field
+        v-model="input.kk"
+        prepend-icon="fas fa-id-card"
+        label="No KK"
+        required
+      />
+      <v-text-field
         v-model="input.nama"
         :rules="rules.nama"
         prepend-icon="fas fa-user"
-        label="Nama"
+        label="Nama Lengkap"
         required
       />
       <v-menu
@@ -61,6 +67,30 @@
         required
       />
 
+      <v-select
+        v-model="input.agama"
+        :items="dataSelect.agama"
+        prepend-icon="fas fa-book"
+        label="Agama"
+        required
+      />
+
+      <v-text-field
+        v-model="input.pekerjaan"
+        :rules="rules.email"
+        label="Pekerjaan"
+        prepend-icon="work"
+        required
+      />
+
+      <v-text-field
+        v-model="input.no_telp"
+        :rules="rules.email"
+        label="Telepon"
+        prepend-icon="fas fa-phone-alt"
+        required
+      />
+
       <v-text-field
         v-model="input.email"
         :rules="rules.email"
@@ -80,10 +110,6 @@
       >
         Daftar
       </v-btn>
-      <br />
-      <!-- <v-btn block rounded color="withe" class="mr-4" @click="reset"
-        ><v-icon>fas fa-sync</v-icon>
-      </v-btn> -->
     </v-card-text>
     <v-snackbar v-model="notification.snackbar" :timeout="notification.timeout">
       {{ notification.massage }}
@@ -96,6 +122,15 @@ export default {
     dataSelect: {
       jenis_kelamin: ["L", "P"],
       gol_darah: ["A", "B", "AB", "O"],
+      agama: [
+        "Islam",
+        "Kristen",
+        "Protestan",
+        "Hindu",
+        "Budha",
+        "Konghucu",
+        "Kepercayaan",
+      ],
     },
     rules: {
       nama: [(v) => !!v || "Nama Tidak Boleh Kosong"],
@@ -111,7 +146,10 @@ export default {
       dob: null,
       pob: "",
       gol_darah: "",
+      pekerjaan: "",
+      telepon: "",
       email: "",
+      entryData: "",
       alamat: {
         jln: "",
         rt: null,

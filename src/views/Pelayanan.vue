@@ -54,7 +54,7 @@
 <script>
 import FormPendaftaran from "../components/form/Pendaftaran";
 import FormSignUp from "../components/form/SignUp";
-import TablePoli from "../components/table/Poli";
+import TablePoli from "../components/table/PoliTable";
 export default {
   components: {
     FormPendaftaran,

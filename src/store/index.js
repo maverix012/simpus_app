@@ -7,8 +7,6 @@ export default new Vuex.Store({
         pasien: localStorage.getItem("pasien") ? JSON.parse(localStorage.getItem("pasien")) : [],
         antrian: localStorage.getItem("antrian") ? JSON.parse(localStorage.getItem("antrian")) : [],
         pegawai: localStorage.getItem("pegawai") ? JSON.parse(localStorage.getItem("pegawai")) : [],
-        dokter: localStorage.getItem("dokter") ? JSON.parse(localStorage.getItem("dokter")) : [],
-        perawat: localStorage.getItem("perawat") ? JSON.parse(localStorage.getItem("perawat")) : [],
         poli: localStorage.getItem("poli") ? JSON.parse(localStorage.getItem("poli")) : [],
         ruang_ranap: localStorage.getItem("ruang_ranap") ? JSON.parse(localStorage.getItem("ruang_ranap")) : [],
     },
@@ -92,6 +90,9 @@ export default new Vuex.Store({
         },
         antrian: state => {
             return state.antrian
+        },
+        dokter: state => {
+            return state.pegawai
         }
     }
 })

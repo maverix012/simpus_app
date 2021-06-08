@@ -69,7 +69,7 @@ export default {
       },
       {
         nama: "Kepegawaian",
-        link: "pegawai",
+        link: "kepegawaian",
         icon: "",
       },
       {

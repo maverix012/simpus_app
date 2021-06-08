@@ -24,7 +24,9 @@
         prepend-icon="fas fa-user-md"
         label="Dokter"
         required
-        :items="dataSelect.Dokter"
+        :items="dokter"
+        item-text="nama"
+        item-value="nama"
       />
       <v-select
         v-model="input.layanan"
@@ -93,7 +95,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["pasien"]),
+    ...mapGetters(["pasien", "dokter"]),
   },
 
   methods: {

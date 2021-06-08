@@ -34,8 +34,8 @@ const routes = [{
     path: '/perpustakaan',
     component: () => import('../views/Perpustakaan.vue')
   }, {
-    path: '/pegawai',
-    component: () => import('../views/Pegawai.vue')
+    path: '/kepegawaian',
+    component: () => import('../views/Kepegawaian.vue')
   }, {
     path: '/settings',
     component: () => import('../views/Settings.vue')
