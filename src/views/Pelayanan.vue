@@ -25,8 +25,8 @@
                     <v-btn icon>
                       <v-icon @click="dialog = false">mdi-close</v-icon>
                     </v-btn>
+                    <span class="headline white--text">Pasien Baru</span>
                   </v-toolbar>
-
                   <v-card-text>
                     <form-sign-up />
                   </v-card-text>

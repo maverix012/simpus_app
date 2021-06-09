@@ -71,6 +71,8 @@ export default {
         sortable: false,
         value: "nama",
       },
+      { text: "Status Pegawai", value: "status_pegawai", sortable: true },
+      { text: "Jabatan Puskesmas", value: "jabpus", sortable: true },
       { text: "Poli", value: "poli", sortable: true },
       { text: "Jabatan Fungsi", value: "jabfung", sortable: true },
       { text: "Agama", value: "agama", sortable: false },

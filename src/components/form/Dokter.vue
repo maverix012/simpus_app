@@ -8,11 +8,27 @@
         label="Nama"
         required
       />
+      <v-select
+        v-model="input.status_pegawai"
+        :rules="rules.status_pegawai"
+        :items="dataSelect.status_pegawai"
+        prepend-icon="fas fa-id-card-alt"
+        label="Status Pegawai"
+        required
+      />
       <v-text-field
         v-model="input.nip"
         :rules="rules.nip"
         prepend-icon="fas fa-id-card"
         label="NIP"
+        required
+      />
+      <v-select
+        v-model="input.jabpus"
+        :rules="rules.jabpus"
+        :items="dataSelect.jabpus"
+        prepend-icon="fas fa-id-card-alt"
+        label="Jabatan Puskesmas"
         required
       />
       <v-select
@@ -149,7 +165,9 @@ export default {
     menu: false,
     input: {
       nama: "",
+      status_pegawai: "",
       nip: "",
+      jabpus: "",
       jabfung: "",
       dob: "",
       pob: "",
@@ -177,17 +195,26 @@ export default {
         (v) => !!v || "Nama tidak boleh kosong",
         (v) => !Number.isInteger(Number(v)) || "harus diisi dengan huruf",
       ],
+      jabpus: [
+        (v) => !!v || "Jabatan Puskesmas tidak boleh kosong",
+        (v) => !Number.isInteger(Number(v)) || "harus diisi dengan huruf",
+      ],
+      jabfung: [
+        (v) => !!v || "Jabatan Fungsi tidak boleh kosong",
+        (v) => !Number.isInteger(Number(v)) || "harus diisi dengan huruf",
+      ],
       email: [
         (v) => !!v || "E-mail tidak kosong",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
     },
     dataSelect: {
+      status_pegawai: ["PNS", "Honor"],
       status_nikah: ["Single", "Menikah"],
       jenis_kelamin: ["L", "P"],
       gol_darah: ["A", "B", "AB", "O"],
       status: ["aktif", "non-aktif"],
-      poli: ["Umum", "Gigi", "KIA"],
+      poli: ["-", "Umum", "Gigi", "KIA"],
       agama: [
         "Islam",
         "Kristen",
@@ -197,7 +224,18 @@ export default {
         "Konghucu",
         "Kepercayaan",
       ],
+      jabpus: [
+        "Kepala Puskesmas",
+        "Kepala Subag TU",
+        "Analis Tata Usaha",
+        "Pengelola Program Dan Kegiatan",
+        "Pengemudi",
+        "Petugas Keamanan",
+        "Administarasi Umum",
+        "IT",
+      ],
       jabfung: [
+        "-",
         "Dokter Umum",
         "Perawat Umum",
         "Dokter Gigi",

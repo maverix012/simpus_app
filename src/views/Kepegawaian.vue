@@ -40,18 +40,18 @@ export default {
       {
         icon: "fas fa-user-alt",
         text: "Pegawai",
-        component: () => import("./subpages/Kepegawaian/Pegawai"),
+        component: () => import("./subpages/Kepegawaian/Dokter"),
       },
       {
         icon: "fas fa-user-nurse",
-        text: "Perawat",
-        component: () => import("./subpages/Kepegawaian/Perawat"),
+        text: "Presensi",
+        component: () => import("./subpages/Kepegawaian/Presensi"),
       },
-      {
-        icon: "fas fa-user-md",
-        text: "Dokter",
-        component: () => import("./subpages/Kepegawaian/Dokter"),
-      },
+      // {
+      //   icon: "fas fa-user-md",
+      //   text: "Dokter",
+      //   component: () => import("./subpages/Kepegawaian/Dokter"),
+      // },
     ],
   }),
 };
