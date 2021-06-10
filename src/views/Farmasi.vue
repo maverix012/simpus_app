@@ -28,44 +28,19 @@
   </v-main>
 </template>
 <script>
-import Pelayanan from "./subpages/Dashboard/Pelayanan";
+import Obat from "./subpages/Kefarmasian/Obat";
 export default {
   components: {
-    Pelayanan,
+    Obat,
   },
   data: () => ({
     drawer: null,
-    selected: "Pelayanan",
+    selected: "Obat",
     menus: [
       {
-        icon: "fas fa-bed",
-        text: "Rawat Inap",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "fas fa-stethoscope",
-        text: "Poli Umum",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "fas fa-tooth",
-        text: "Poli Gigi",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "pregnant_woman",
-        text: "Poli KIA",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "fas fa-baby",
-        text: "Poli MTBS",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
-      },
-      {
-        icon: "fas fa-baby",
-        text: "Poli Konsultasi",
-        component: () => import("./subpages/Dashboard/Pelayanan"),
+        icon: "fas fa-tablets",
+        text: "Obat",
+        component: () => import("./subpages/Kefarmasian/Obat"),
       },
     ],
   }),

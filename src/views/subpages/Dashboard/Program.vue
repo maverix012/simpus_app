@@ -1,20 +1,18 @@
 <template>
-  <div>
-    <v-container>
-      <v-row>
-        <v-col v-for="data in charts" :key="data.length" cols="4">
-          <v-card>
-            <v-card-title primary-title> {{ data.title }} </v-card-title>
-            <component
-              :bind="data.component"
-              :is="data.component"
-              :chart-data="data.value"
-            />
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container>
+    <v-row>
+      <v-col v-for="data in charts" :key="data.length" cols="4">
+        <v-card>
+          <v-card-title primary-title> {{ data.title }} </v-card-title>
+          <component
+            :bind="data.component"
+            :is="data.component"
+            :chart-data="data.value"
+          />
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <script>
 export default {

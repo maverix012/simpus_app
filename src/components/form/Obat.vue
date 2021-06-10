@@ -1,16 +1,26 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
-    <v-text-field :counter="10" :rules="nameRules" label="Nama" required />
-    <v-text-field :counter="10" :rules="nameRules" label="Kategori" required />
-    <v-text-field :counter="10" :rules="nameRules" label="Golongan" required />
+  <v-form ref="form" @submit.prevent="store()" lazy-validation>
+    <v-card-text>
+      <v-text-field label="Nama Obat" required />
+      <v-select label="Kategori" required />
+      <v-select label="Satuan" required />
+      <v-text-field label="Kegunaan" required />
 
-    <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">
-      Validate
-    </v-btn>
-
-    <v-btn color="error" class="mr-4" @click="reset"> Reset Form </v-btn>
-
-    <v-btn color="warning" @click="resetValidation"> Reset Validation </v-btn>
+      <v-btn
+        block
+        rounded
+        :disabled="!valid"
+        color="teal accent-3"
+        class="mr-4"
+        dark
+        type="submit"
+      >
+        Simpan
+      </v-btn>
+    </v-card-text>
+    <v-snackbar v-model="notification.snackbar" :timeout="notification.timeout">
+      {{ notification.massage }}
+    </v-snackbar>
   </v-form>
 </template>
 <script>
@@ -27,9 +37,11 @@ export default {
       (v) => !!v || "E-mail is required",
       (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false,
+    notification: {
+      snackbar: false,
+      timeout: 5000,
+      massage: null,
+    },
   }),
 
   methods: {
