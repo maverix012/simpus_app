@@ -9,7 +9,6 @@
         return-object
         :items="pasien"
         :filter="customFilter"
-        item-text="name"
       >
         <template slot="selection" slot-scope="data">
           {{ data.item.no_rm }} - {{ data.item.nama }} - {{ data.item.nik }}
@@ -128,19 +127,14 @@ export default {
           "Data harus diisi dengan benar / data tidak boleh kosong";
       }
     },
-    save(date) {
-      this.$refs.menu.save(date);
-    },
+
     customFilter(item, queryText) {
       const textOne = item.nama.toLowerCase();
       const textTwo = item.nik.toLowerCase();
-      const textThree = item.no_rm.toLowerCase();
       const searchText = queryText.toLowerCase();
 
       return (
-        textOne.indexOf(searchText) > -1 ||
-        textTwo.indexOf(searchText) > -1 ||
-        textThree.indexOf(searchText) > -1
+        textOne.indexOf(searchText) > -1 || textTwo.indexOf(searchText) > -1
       );
     },
   },

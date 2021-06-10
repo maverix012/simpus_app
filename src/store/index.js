@@ -93,6 +93,9 @@ export default new Vuex.Store({
         },
         pegawai: state => {
             return state.pegawai
+        },
+        dokter: state => {
+            return state.pegawai
         }
     }
 })
