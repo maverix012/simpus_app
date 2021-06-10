@@ -1,15 +1,15 @@
 <template>
   <v-container>
     <v-card>
-      <dokter-table />
+      <pegawai-table />
     </v-card>
   </v-container>
 </template>
 <script>
-import DokterTable from "../../../components/table/DokterTable";
+import PegawaiTable from "../../../components/table/PegawaiTable";
 export default {
   components: {
-    DokterTable,
+    PegawaiTable,
   },
   data: () => ({}),
 };

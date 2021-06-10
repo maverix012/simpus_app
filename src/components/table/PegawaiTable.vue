@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="pegawai"
     sort-by="calories"
     class="elevation-1"
   >
@@ -21,7 +21,7 @@
               <v-btn icon>
                 <v-icon @click="dialog = false">mdi-close</v-icon>
               </v-btn>
-              <span class="headline">{{ formTitle }}</span>
+              <span class="headline white--text">Pegawai</span>
             </v-toolbar>
 
             <v-card-text>
@@ -49,21 +49,14 @@
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">
-        fas fa-notes-medical
-      </v-icon>
-      <v-icon small class="mr-2" @click="editItem(item)">
-        fas fa-volume-up
-      </v-icon>
-      <!-- <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon> -->
-    </template>
-    <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize"> Reset </v-btn>
+      <v-icon small class="mr-2" @click="editItem(item)"> fas fa-user </v-icon>
+      <v-icon small class="mr-2" @click="editItem(item)"> fas fa-edit </v-icon>
     </template>
   </v-data-table>
 </template>
 <script>
 import FormPegawai from "../form/Pegawai";
+import { mapGetters } from "vuex";
 export default {
   components: {
     FormPegawai,
@@ -73,39 +66,28 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Dessert (100g serving)",
+        text: "Nama",
         align: "start",
         sortable: false,
-        value: "name",
+        value: "nama",
       },
-      { text: "Calories", value: "calories" },
-      { text: "Fat (g)", value: "fat" },
-      { text: "Carbs (g)", value: "carbs" },
-      { text: "Protein (g)", value: "protein" },
+      { text: "Status Pegawai", value: "status_pegawai", sortable: true },
+      { text: "Jabatan Puskesmas", value: "jabpus", sortable: true },
+      { text: "Poli", value: "poli", sortable: true },
+      { text: "Jabatan Fungsi", value: "jabfung", sortable: true },
+      { text: "Agama", value: "agama", sortable: false },
+      { text: "Telepon", value: "no_telp", sortable: false },
+      { text: "Status", value: "status", sortable: false },
       { text: "Actions", value: "actions", sortable: false },
     ],
-    desserts: [],
     editedIndex: -1,
-    editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
-    },
-    defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
-    },
   }),
 
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
-    },
+    ...mapGetters(["pegawai"]),
+    // formTitle() {
+    //   return this.editedIndex === -1 ? "Dokter" : "Dokter";
+    // },
   },
 
   watch: {
@@ -117,86 +99,9 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
+  created() {},
 
   methods: {
-    initialize() {
-      this.desserts = [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-        },
-      ];
-    },
-
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);

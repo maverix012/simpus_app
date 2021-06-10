@@ -77,7 +77,6 @@
 
       <v-text-field
         v-model="input.pekerjaan"
-        :rules="rules.email"
         label="Pekerjaan"
         prepend-icon="work"
         required
@@ -85,7 +84,6 @@
 
       <v-text-field
         v-model="input.no_telp"
-        :rules="rules.email"
         label="Telepon"
         prepend-icon="fas fa-phone-alt"
         required

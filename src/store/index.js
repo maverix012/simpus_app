@@ -91,7 +91,7 @@ export default new Vuex.Store({
         antrian: state => {
             return state.antrian
         },
-        dokter: state => {
+        pegawai: state => {
             return state.pegawai
         }
     }

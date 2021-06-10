@@ -8,9 +8,16 @@
         required
         return-object
         :items="pasien"
-        item-text="nik"
-        item-value="nik"
-      />
+        :filter="customFilter"
+        item-text="name"
+      >
+        <template slot="selection" slot-scope="data">
+          {{ data.item.no_rm }} - {{ data.item.nama }} - {{ data.item.nik }}
+        </template>
+        <template slot="item" slot-scope="data">
+          {{ data.item.no_rm }} - {{ data.item.nama }} - {{ data.item.nik }}
+        </template>
+      </v-autocomplete>
       <v-select
         v-model="input.poli"
         prepend-icon="fas fa-briefcase-medical"
@@ -123,6 +130,18 @@ export default {
     },
     save(date) {
       this.$refs.menu.save(date);
+    },
+    customFilter(item, queryText) {
+      const textOne = item.nama.toLowerCase();
+      const textTwo = item.nik.toLowerCase();
+      const textThree = item.no_rm.toLowerCase();
+      const searchText = queryText.toLowerCase();
+
+      return (
+        textOne.indexOf(searchText) > -1 ||
+        textTwo.indexOf(searchText) > -1 ||
+        textThree.indexOf(searchText) > -1
+      );
     },
   },
 };

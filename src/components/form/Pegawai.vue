@@ -2,17 +2,41 @@
   <v-form ref="form" @submit.prevent="store()" lazy-validation>
     <v-card-text>
       <v-text-field
-        v-model="input.kd_pegawai"
-        :rules="rules.kode"
-        prepend-icon="fas fa-id-card-alt"
-        label="Kode"
-        required
-      />
-      <v-text-field
         v-model="input.nama"
         :rules="rules.nama"
         prepend-icon="fas fa-user"
-        label="Nama Lengkap"
+        label="Nama"
+        required
+      />
+      <v-select
+        v-model="input.status_pegawai"
+        :rules="rules.status_pegawai"
+        :items="dataSelect.status_pegawai"
+        prepend-icon="fas fa-id-card-alt"
+        label="Status Pegawai"
+        required
+      />
+      <v-text-field
+        v-model="input.nip"
+        :rules="rules.nip"
+        prepend-icon="fas fa-id-card"
+        label="NIP"
+        required
+      />
+      <v-select
+        v-model="input.jabpus"
+        :rules="rules.jabpus"
+        :items="dataSelect.jabpus"
+        prepend-icon="fas fa-id-card-alt"
+        label="Jabatan Puskesmas"
+        required
+      />
+      <v-select
+        v-model="input.jabfung"
+        :rules="rules.jabfung"
+        :items="dataSelect.jabfung"
+        prepend-icon="fas fa-id-card-alt"
+        label="Jabatan Fungsional"
         required
       />
       <v-menu
@@ -69,31 +93,45 @@
         required
       />
       <v-text-field
-        v-model="input.no_telp_dokter"
+        v-model="input.no_telp"
         prepend-icon="fas fa-phone-alt"
         label="Telepon"
         required
       />
       <v-text-field
+        v-model="input.email"
+        :rules="rules.email"
+        label="E-mail"
+        prepend-icon="email"
+        required
+      />
+      <v-select
         v-model="input.status_nikah"
         prepend-icon="fas fa-user-friends"
+        :items="dataSelect.status_nikah"
         label="Status Nikah"
         required
       />
-      <v-text-field
-        v-model="input.jabatan"
-        prepend-icon="fas fa-user-friends"
-        label="Jabatan"
-        required
-      />
-
-      <!-- <v-select
-        v-model="input.no_telp_dokter"
+      <v-select
+        v-model="input.poli"
         prepend-icon="fas fa-briefcase-medical"
         :items="dataSelect.poli"
         label="Poli"
         required
-      /> -->
+      />
+      <v-text-field
+        v-model="input.alumni"
+        prepend-icon="fas fa-university"
+        label="Alumni Universitas"
+        required
+      />
+      <v-text-field
+        v-model="input.no_sip"
+        prepend-icon="fas fa-id-card"
+        :rules="rules.sip"
+        label="No. SIP"
+        required
+      />
       <v-select
         v-model="input.status"
         :items="dataSelect.status"
@@ -101,6 +139,7 @@
         label="Status"
         required
       />
+
       <v-btn
         block
         rounded
@@ -125,28 +164,57 @@ export default {
     date: null,
     menu: false,
     input: {
-      kd_pegawai: "",
       nama: "",
+      status_pegawai: "",
+      nip: "",
+      jabpus: "",
+      jabfung: "",
+      dob: "",
+      pob: "",
+      jk: "",
+      gol_darah: "",
+      agama: "",
+      no_telp: "",
+      email: "",
+      status_nikah: "",
+      poli: "",
+      alumni: "",
+      no_sip: "",
+      status: "",
     },
     rules: {
-      kode: [
-        (v) => !!v || "Kode is required",
-        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+      nip: [
+        (v) => !!v || "NIP tidak bolah kosong",
+        (v) => Number.isInteger(Number(v)) || "Harus diisi dengan angka",
+      ],
+      sip: [
+        (v) => !!v || "No. SIP tidak boleh Kosong",
+        (v) => Number.isInteger(Number(v)) || "Harus diisi dengan angka",
       ],
       nama: [
-        (v) => !!v || "Name is required",
-        (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
+        (v) => !!v || "Nama tidak boleh kosong",
+        (v) => !Number.isInteger(Number(v)) || "harus diisi dengan huruf",
+      ],
+      jabpus: [
+        (v) => !!v || "Jabatan Puskesmas tidak boleh kosong",
+        (v) => !Number.isInteger(Number(v)) || "harus diisi dengan huruf",
+      ],
+      jabfung: [
+        (v) => !!v || "Jabatan Fungsi tidak boleh kosong",
+        (v) => !Number.isInteger(Number(v)) || "harus diisi dengan huruf",
       ],
       email: [
-        (v) => !!v || "E-mail is required",
+        (v) => !!v || "E-mail tidak kosong",
         (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
     },
     dataSelect: {
+      status_pegawai: ["PNS", "Honor"],
+      status_nikah: ["Single", "Menikah"],
       jenis_kelamin: ["L", "P"],
       gol_darah: ["A", "B", "AB", "O"],
       status: ["aktif", "non-aktif"],
-      poli: ["Umum", "Gigi", "KIA"],
+      poli: ["-", "Umum", "Gigi", "KIA"],
       agama: [
         "Islam",
         "Kristen",
@@ -155,6 +223,33 @@ export default {
         "Budha",
         "Konghucu",
         "Kepercayaan",
+      ],
+      jabpus: [
+        "Kepala Puskesmas",
+        "Kepala Subag TU",
+        "Analis Tata Usaha",
+        "Pengelola Program Dan Kegiatan",
+        "Pengemudi",
+        "Petugas Keamanan",
+        "Administarasi Umum",
+        "IT",
+      ],
+      jabfung: [
+        "-",
+        "Dokter Umum",
+        "Perawat Umum",
+        "Dokter Gigi",
+        "Perawat Gigi",
+        "Bidan",
+        "Analis",
+        "Nutrisionis",
+        "Apoteker",
+        "Asisten Apoteker",
+        "Sanitarian",
+        "Rekam Medis",
+        "Epidemologi",
+        "Analis Kesehatan",
+        "Penyuluh Kesehatan",
       ],
     },
     notification: {
