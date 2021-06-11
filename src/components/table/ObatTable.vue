@@ -1,8 +1,8 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
-    sort-by="calories"
+    :items="obat"
+    sort-by="nama"
     class="elevation-1"
   >
     <template v-slot:top>
@@ -18,10 +18,14 @@
           </template>
           <v-card>
             <v-toolbar color="teal accent-3">
-              <v-btn icon>
-                <v-icon @click="dialog = false">mdi-close</v-icon>
-              </v-btn>
-              <span class="headline white--text">Obat</span>
+              <v-app-bar-nav-icon>
+                <v-btn fab small dark color="teal darken-2">
+                  <v-icon @click="dialog = false">mdi-close</v-icon>
+                </v-btn>
+              </v-app-bar-nav-icon>
+              <v-toolbar-title class="headline white--text"
+                >Obat</v-toolbar-title
+              >
             </v-toolbar>
             <v-card-text>
               <form-obat />
@@ -32,20 +36,15 @@
     </template>
     <template v-slot:[`item.actions`]="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)">
-        fas fa-notes-medical
+        fas fa-clipboard
       </v-icon>
-      <v-icon small class="mr-2" @click="editItem(item)">
-        fas fa-volume-up
-      </v-icon>
-      <!-- <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon> -->
-    </template>
-    <template v-slot:no-data>
-      <v-btn color="primary" @click="initialize"> Reset </v-btn>
+      <v-icon small class="mr-2" @click="editItem(item)"> fas fa-edit </v-icon>
     </template>
   </v-data-table>
 </template>
 <script>
 import FormObat from "../form/Obat";
+import { mapGetters } from "vuex";
 export default {
   components: {
     FormObat,
@@ -55,36 +54,24 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Dessert (100g serving)",
+        text: "Nama",
         align: "start",
+        value: "nama",
         sortable: false,
-        value: "name",
       },
-      { text: "Calories", value: "calories" },
-      { text: "Fat (g)", value: "fat" },
-      { text: "Carbs (g)", value: "carbs" },
-      { text: "Protein (g)", value: "protein" },
+      { text: "Kategori", value: "kategori", sortable: false },
+      { text: "Jenis", value: "jenis", sortable: false },
+
       { text: "Actions", value: "actions", sortable: false },
     ],
     desserts: [],
     editedIndex: -1,
-    editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
-    },
-    defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
-    },
+    editedItem: {},
+    defaultItem: {},
   }),
 
   computed: {
+    ...mapGetters(["obat"]),
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
     },
@@ -99,86 +86,7 @@ export default {
     },
   },
 
-  created() {
-    this.initialize();
-  },
-
   methods: {
-    initialize() {
-      this.desserts = [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-        },
-      ];
-    },
-
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
       this.editedItem = Object.assign({}, item);

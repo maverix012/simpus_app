@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="pegawai"
-    sort-by="calories"
+    sort-by="nama"
     class="elevation-1"
   >
     <template v-slot:top>
@@ -10,7 +10,7 @@
         <v-toolbar-title>Pegawai</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" persistent max-width="500px">
+        <v-dialog v-model="popUp.pegawai" persistent max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
               Tambah Pegawai
@@ -18,10 +18,14 @@
           </template>
           <v-card>
             <v-toolbar color="teal accent-3">
-              <v-btn icon>
-                <v-icon @click="dialog = false">mdi-close</v-icon>
-              </v-btn>
-              <span class="headline white--text">Pegawai</span>
+              <v-app-bar-nav-icon>
+                <v-btn fab small dark color="teal darken-2">
+                  <v-icon @click="popUp.pegawai = false">mdi-close</v-icon>
+                </v-btn>
+              </v-app-bar-nav-icon>
+              <v-toolbar-title class="headline white--text"
+                >Pegawai</v-toolbar-title
+              >
             </v-toolbar>
 
             <v-card-text>
@@ -29,27 +33,19 @@
             </v-card-text>
           </v-card>
         </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
+        <v-dialog v-model="popUp.pegawaiDetail" max-width="500px">
           <v-card>
             <v-card-title class="headline"
               >Are you sure you want to delete this item?</v-card-title
             >
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="closeDelete"
-                >Cancel</v-btn
-              >
-              <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                >OK</v-btn
-              >
-              <v-spacer></v-spacer>
-            </v-card-actions>
           </v-card>
         </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)"> fas fa-user </v-icon>
+      <v-icon small class="mr-2" @click="detailItem(item)">
+        fas fa-user
+      </v-icon>
       <v-icon small class="mr-2" @click="editItem(item)"> fas fa-edit </v-icon>
     </template>
   </v-data-table>
@@ -62,8 +58,10 @@ export default {
     FormPegawai,
   },
   data: () => ({
-    dialog: false,
-    dialogDelete: false,
+    popUp: {
+      pegawai: false,
+      pegawaiDetail: false,
+    },
     headers: [
       {
         text: "Nama",
@@ -81,13 +79,12 @@ export default {
       { text: "Actions", value: "actions", sortable: false },
     ],
     editedIndex: -1,
+    editedItem: {},
+    defaultItem: {},
   }),
 
   computed: {
     ...mapGetters(["pegawai"]),
-    // formTitle() {
-    //   return this.editedIndex === -1 ? "Dokter" : "Dokter";
-    // },
   },
 
   watch: {
@@ -99,19 +96,21 @@ export default {
     },
   },
 
-  created() {},
-
   methods: {
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.pegawai.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.dialog = true;
+      this.popUp.pegawai = true;
+    },
+
+    detailItem(item) {
+      this.editedIndex = this.pegawai.indexOf(item);
+      this.popUp.pegawaiDetail = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.pegawai.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
@@ -128,7 +127,7 @@ export default {
     },
 
     closeDelete() {
-      this.dialogDelete = false;
+      // this.dialogDelete = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;

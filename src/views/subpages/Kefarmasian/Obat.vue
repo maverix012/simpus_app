@@ -10,9 +10,5 @@ export default {
   components: {
     ObatTable,
   },
-  data: () => ({}),
 };
 </script>
-  
-<style>
-</style>

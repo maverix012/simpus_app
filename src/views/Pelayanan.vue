@@ -22,10 +22,14 @@
                 </template>
                 <v-card>
                   <v-toolbar color="teal accent-3">
-                    <v-btn icon>
-                      <v-icon @click="dialog = false">mdi-close</v-icon>
-                    </v-btn>
-                    <span class="headline white--text">Pasien Baru</span>
+                    <v-app-bar-nav-icon>
+                      <v-btn fab small dark color="teal darken-2">
+                        <v-icon @click="dialog = false">mdi-close</v-icon>
+                      </v-btn>
+                    </v-app-bar-nav-icon>
+                    <v-toolbar-title class="headline white--text"
+                      >Pasien Baru</v-toolbar-title
+                    >
                   </v-toolbar>
                   <v-card-text>
                     <form-sign-up />

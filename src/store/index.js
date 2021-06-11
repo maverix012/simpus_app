@@ -8,6 +8,7 @@ export default new Vuex.Store({
         antrian: localStorage.getItem("antrian") ? JSON.parse(localStorage.getItem("antrian")) : [],
         pegawai: localStorage.getItem("pegawai") ? JSON.parse(localStorage.getItem("pegawai")) : [],
         poli: localStorage.getItem("poli") ? JSON.parse(localStorage.getItem("poli")) : [],
+        obat: localStorage.getItem("obat") ? JSON.parse(localStorage.getItem("obat")) : [],
         ruang_ranap: localStorage.getItem("ruang_ranap") ? JSON.parse(localStorage.getItem("ruang_ranap")) : [],
     },
     mutations: {
@@ -41,9 +42,9 @@ export default new Vuex.Store({
                     state.pegawai.push(input)
                     localStorage.setItem('pegawai', JSON.stringify(state.pegawai))
                     break
-                case "perawat":
-                    state.perawat.push(input)
-                    localStorage.setItem('perawat', JSON.stringify(state.perawat))
+                case "obat":
+                    state.obat.push(input)
+                    localStorage.setItem('obat', JSON.stringify(state.obat))
                     break
             }
 
@@ -96,6 +97,9 @@ export default new Vuex.Store({
         },
         dokter: state => {
             return state.pegawai
+        },
+        obat: state => {
+            return state.obat
         }
     }
 })

@@ -30,7 +30,7 @@
             </v-card-actions>
           </v-card> -->
         </v-dialog>
-        <v-dialog v-model="dialogDelete" max-width="500px">
+        <!-- <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
             <v-card-title class="headline"
               >Are you sure you want to delete this item?</v-card-title
@@ -46,7 +46,7 @@
               <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
-        </v-dialog>
+        </v-dialog> -->
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
