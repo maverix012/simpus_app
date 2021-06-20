@@ -10,7 +10,7 @@
         <v-toolbar-title>Pegawai</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="popUp.pegawai" persistent max-width="500px">
+        <v-dialog v-model="popUp.addPegawai" persistent max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
               Tambah Pegawai
@@ -20,7 +20,7 @@
             <v-toolbar color="teal accent-3">
               <v-app-bar-nav-icon>
                 <v-btn fab small dark color="teal darken-2">
-                  <v-icon @click="popUp.pegawai = false">mdi-close</v-icon>
+                  <v-icon @click="popUp.addPegawai = false">mdi-close</v-icon>
                 </v-btn>
               </v-app-bar-nav-icon>
               <v-toolbar-title class="headline white--text"
@@ -33,11 +33,11 @@
             </v-card-text>
           </v-card>
         </v-dialog>
-        <v-dialog v-model="popUp.pegawaiDetail" max-width="500px">
+        <v-dialog v-model="popUp.detailPegawai" max-width="500px">
           <v-card>
-            <v-card-title class="headline"
-              >Are you sure you want to delete this item?</v-card-title
-            >
+            <v-card-title class="headline"></v-card-title>
+
+            <v-card-text> </v-card-text>
           </v-card>
         </v-dialog>
       </v-toolbar>
@@ -59,8 +59,8 @@ export default {
   },
   data: () => ({
     popUp: {
-      pegawai: false,
-      pegawaiDetail: false,
+      addPegawai: false,
+      detailPegawai: false,
     },
     headers: [
       {
@@ -100,12 +100,12 @@ export default {
     editItem(item) {
       this.editedIndex = this.pegawai.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.popUp.pegawai = true;
+      this.popUp.addPegawai = true;
     },
 
     detailItem(item) {
       this.editedIndex = this.pegawai.indexOf(item);
-      this.popUp.pegawaiDetail = true;
+      this.popUp.detailPegawai = true;
     },
 
     deleteItem(item) {

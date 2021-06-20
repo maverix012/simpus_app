@@ -33,13 +33,13 @@
               </v-window-item>
               <v-window-item :value="2">
                 <v-layout class="fill-height">
-                  <v-flex class="teal accent-3 align-center" d-flex xs6>
+                  <v-flex class="teal accent-3 align-center" d-flex xs12>
                     <v-layout align-center justify-center class="white--text">
                       <v-container>
                         <h1 class="text-center display-1">WELCOME</h1>
                         <h4 class="text-center">
-                          Untuk dapat terhubung dengan aplikasi puskesmas
-                          silahkan masuk dengan akun anda
+                          Pendaftaran hanya dapat dilakukan di Faskes terdekat
+                          di daerah anda
                         </h4>
                         <br />
                         <div class="text-center">
@@ -50,9 +50,9 @@
                       </v-container>
                     </v-layout>
                   </v-flex>
-                  <v-flex xs6>
-                    <form-sign-up />
-                  </v-flex>
+                  <!-- <v-flex xs6> -->
+                  <!-- <form-sign-up /> -->
+                  <!-- </v-flex> -->
                 </v-layout>
               </v-window-item>
             </v-window>
@@ -64,11 +64,11 @@
 </template>
 <script>
 import FormSignIn from "../components/form/SignIn";
-import FormSignUp from "../components/form/SignUp";
+// import FormSignUp from "../components/form/SignUp";
 export default {
   components: {
     FormSignIn,
-    FormSignUp,
+    // FormSignUp,
   },
   data: () => ({
     step: 1,

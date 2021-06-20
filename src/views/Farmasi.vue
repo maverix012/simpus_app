@@ -42,6 +42,16 @@ export default {
         text: "Obat",
         component: () => import("./subpages/Kefarmasian/Obat"),
       },
+      {
+        icon: "fas fa-box",
+        text: "Obat Masuk",
+        component: () => import("./subpages/Kefarmasian/Obat"),
+      },
+      {
+        icon: "fas fa-truck-loading",
+        text: "Obat Keluar",
+        component: () => import("./subpages/Kefarmasian/Obat"),
+      },
     ],
   }),
 };

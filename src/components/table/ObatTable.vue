@@ -10,7 +10,7 @@
         <v-toolbar-title>Obat</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" persistent max-width="500px">
+        <v-dialog v-model="popUp.addObat" persistent max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
               Tambah Obat
@@ -20,7 +20,7 @@
             <v-toolbar color="teal accent-3">
               <v-app-bar-nav-icon>
                 <v-btn fab small dark color="teal darken-2">
-                  <v-icon @click="dialog = false">mdi-close</v-icon>
+                  <v-icon @click="popUp.addObat = false">mdi-close</v-icon>
                 </v-btn>
               </v-app-bar-nav-icon>
               <v-toolbar-title class="headline white--text"
@@ -32,10 +32,32 @@
             </v-card-text>
           </v-card>
         </v-dialog>
+        <v-dialog
+          v-model="popUp.detailObat"
+          max-width="500px"
+          fullscreen
+          hide-overlay
+          transition="dialog-bottom-transition"
+        >
+          <v-card>
+            <v-toolbar color="teal accent-3">
+              <v-app-bar-nav-icon>
+                <v-btn fab small dark color="teal darken-2">
+                  <v-icon @click="popUp.detailObat = false">mdi-close</v-icon>
+                </v-btn>
+              </v-app-bar-nav-icon>
+              <v-toolbar-title class="headline white--text"
+                >Obat</v-toolbar-title
+              >
+            </v-toolbar>
+
+            <v-card-text> </v-card-text>
+          </v-card>
+        </v-dialog>
       </v-toolbar>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">
+      <v-icon small class="mr-2" @click="detailItem(item)">
         fas fa-clipboard
       </v-icon>
       <v-icon small class="mr-2" @click="editItem(item)"> fas fa-edit </v-icon>
@@ -50,8 +72,8 @@ export default {
     FormObat,
   },
   data: () => ({
-    dialog: false,
-    dialogDelete: false,
+    popUp: { addObat: false, detailObat: false },
+    // dialogDelete: false,
     headers: [
       {
         text: "Nama",
@@ -64,7 +86,6 @@ export default {
 
       { text: "Actions", value: "actions", sortable: false },
     ],
-    desserts: [],
     editedIndex: -1,
     editedItem: {},
     defaultItem: {},
@@ -88,13 +109,17 @@ export default {
 
   methods: {
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.obat.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.dialog = true;
+      this.popUp.addObat = true;
     },
-
+    detailItem(item) {
+      this.editedIndex = this.obat.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.popUp.detailObat = true;
+    },
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.obat.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },

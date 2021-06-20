@@ -21,7 +21,7 @@
         v-model="input.poli"
         prepend-icon="fas fa-briefcase-medical"
         :rules="rules.poli"
-        label="Poliklinik"
+        label="Poli"
         required
         :items="dataSelect.Poli"
       />

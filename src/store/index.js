@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
+
+axios.defaults.baseURL = 'http://localhost:8100/api/'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -21,37 +25,37 @@ export default new Vuex.Store({
         //     state.poli = JSON.parse(localStorage.getItem("poli"))
         //     state.ruang_ranap = JSON.parse(localStorage.getItem("ruang_ranap"))
         // },
-        addData(state, {
+        async addData(state, {
             input,
             select
         }) {
             switch (select) {
                 case "pasien":
                     state.pasien.push(input)
-                    localStorage.setItem('pasien', JSON.stringify(state.pasien))
+                    await localStorage.setItem('pasien', JSON.stringify(state.pasien))
                     break
                 case "antrian":
                     state.antrian.push(input)
-                    localStorage.setItem('antrian', JSON.stringify(state.antrian))
+                    await localStorage.setItem('antrian', JSON.stringify(state.antrian))
                     break
                 case "dokter":
                     state.dokter.push(input)
-                    localStorage.setItem('dokter', JSON.stringify(state.dokter))
+                    await localStorage.setItem('dokter', JSON.stringify(state.dokter))
                     break
                 case "pegawai":
                     state.pegawai.push(input)
-                    localStorage.setItem('pegawai', JSON.stringify(state.pegawai))
+                    await localStorage.setItem('pegawai', JSON.stringify(state.pegawai))
                     break
                 case "obat":
                     state.obat.push(input)
-                    localStorage.setItem('obat', JSON.stringify(state.obat))
+                    await localStorage.setItem('obat', JSON.stringify(state.obat))
                     break
             }
 
         },
-        removeData(state, input) {
+        async removeData(state, input) {
             state.pasien.splice(state.pasien.indexOf(input), 1)
-            localStorage.setItem('pasien', JSON.stringify(state.antrian))
+            await localStorage.setItem('pasien', JSON.stringify(state.antrian))
         }
     },
     actions: {
@@ -83,7 +87,9 @@ export default new Vuex.Store({
         delete() {
 
         },
-        syncAPI() {}
+        syncAPI() {
+            axios.post('', localStorage.getItem(''))
+        }
     },
     getters: {
         pasien: state => {

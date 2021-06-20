@@ -1,102 +1,107 @@
 <template>
   <v-form ref="form" @submit.prevent="store()" lazy-validation>
     <v-card-text>
-      <v-text-field
-        v-model="input.nik"
-        prepend-icon="fas fa-id-card"
-        label="NIK"
-        required
-      />
-      <v-text-field
-        v-model="input.kk"
-        prepend-icon="fas fa-id-card"
-        label="No KK"
-        required
-      />
-      <v-text-field
-        v-model="input.nama"
-        :rules="rules.nama"
-        prepend-icon="fas fa-user"
-        label="Nama Lengkap"
-        required
-      />
-      <v-menu
-        ref="menu"
-        v-model="menu"
-        :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
-        min-width="auto"
-      >
-        <template v-slot:activator="{ on, attrs }">
+      <v-layout class="fill-height">
+        <v-flex xs6>
           <v-text-field
-            v-model="input.dob"
-            label="Tanggal Lahir"
-            prepend-icon="mdi-calendar"
-            readonly
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          ref="picker"
-          v-model="input.dob"
-          :max="new Date().toISOString().substr(0, 10)"
-          min="1950-01-01"
-          @change="save"
-        ></v-date-picker>
-      </v-menu>
-      <v-text-field
-        v-model="input.pob"
-        prepend-icon="fas fa-map-marker-alt"
-        label="Tempat Lahir"
-        required
-      />
-      <v-select
-        v-model="input.jk"
-        :items="dataSelect.jenis_kelamin"
-        prepend-icon="fas fa-venus-mars"
-        label="Jenis Kelamin"
-        required
-      />
-      <v-select
-        v-model="input.gol_darah"
-        :items="dataSelect.gol_darah"
-        prepend-icon="fas fa-tint"
-        label="Golongan Darah"
-        required
-      />
+            v-model="input.nik"
+            prepend-icon="fas fa-id-card"
+            label="NIK"
+            required
+          />
+          <v-text-field
+            v-model="input.kk"
+            prepend-icon="fas fa-id-card"
+            label="No KK"
+            required
+          />
+          <v-text-field
+            v-model="input.nama"
+            :rules="rules.nama"
+            prepend-icon="fas fa-user"
+            label="Nama Lengkap"
+            required
+          />
+          <v-menu
+            ref="menu"
+            v-model="menu"
+            :close-on-content-click="false"
+            transition="scale-transition"
+            offset-y
+            min-width="auto"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="input.dob"
+                label="Tanggal Lahir"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              ref="picker"
+              v-model="input.dob"
+              :max="new Date().toISOString().substr(0, 10)"
+              min="1950-01-01"
+              @change="save"
+            ></v-date-picker>
+          </v-menu>
+          <v-text-field
+            v-model="input.pob"
+            prepend-icon="fas fa-map-marker-alt"
+            label="Tempat Lahir"
+            required
+          />
+        </v-flex>
+        <v-flex xs6>
+          <v-select
+            v-model="input.jk"
+            :items="dataSelect.jenis_kelamin"
+            prepend-icon="fas fa-venus-mars"
+            label="Jenis Kelamin"
+            required
+          />
+          <v-select
+            v-model="input.gol_darah"
+            :items="dataSelect.gol_darah"
+            prepend-icon="fas fa-tint"
+            label="Golongan Darah"
+            required
+          />
 
-      <v-select
-        v-model="input.agama"
-        :items="dataSelect.agama"
-        prepend-icon="fas fa-book"
-        label="Agama"
-        required
-      />
+          <v-select
+            v-model="input.agama"
+            :items="dataSelect.agama"
+            prepend-icon="fas fa-book"
+            label="Agama"
+            required
+          />
 
-      <v-text-field
-        v-model="input.pekerjaan"
-        label="Pekerjaan"
-        prepend-icon="work"
-        required
-      />
+          <v-text-field
+            v-model="input.pekerjaan"
+            label="Pekerjaan"
+            prepend-icon="work"
+            required
+          />
 
-      <v-text-field
-        v-model="input.no_telp"
-        label="Telepon"
-        prepend-icon="fas fa-phone-alt"
-        required
-      />
+          <v-text-field
+            v-model="input.no_telp"
+            label="Telepon"
+            prepend-icon="fas fa-phone-alt"
+            required
+          />
 
-      <v-text-field
-        v-model="input.email"
-        :rules="rules.email"
-        label="E-mail"
-        prepend-icon="email"
-        required
-      />
-
+          <v-text-field
+            v-model="input.email"
+            :rules="rules.email"
+            label="E-mail"
+            prepend-icon="email"
+            required
+          />
+        </v-flex>
+      </v-layout>
       <v-btn
         block
         rounded
