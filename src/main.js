@@ -4,6 +4,12 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
+// import socketio from 'socket.io';
+// import VueSocketIO from 'vue-socket.io';
+
+// export const SocketInstance = socketio('http://localhost:4113');
+
+// Vue.use(VueSocketIO, SocketInstance)
 
 Vue.config.productionTip = false
 

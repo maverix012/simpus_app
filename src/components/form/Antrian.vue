@@ -38,6 +38,9 @@
     >
       cetak
     </v-btn>
+    <v-snackbar v-model="notification.snackbar" :timeout="notification.timeout">
+      {{ notification.massage }}
+    </v-snackbar>
   </v-form>
 </template>
 <script>
@@ -51,6 +54,11 @@ export default {
       poli: [(v) => !!v || "Poli Tidak Boleh Kosong"],
       layanan: [(v) => !!v || "Layanan Tidak Boleh Kosong"],
     },
+    notification: {
+      snackbar: false,
+      timeout: 5000,
+      massage: null,
+    },
     input: {
       pasien: "",
       dokter: "",
@@ -60,7 +68,7 @@ export default {
   }),
 
   computed: {
-    ...mapGetters(["dokter"]),
+    ...mapGetters(["dokter", "poli"]),
   },
 
   methods: {
@@ -71,13 +79,11 @@ export default {
           input: { ...this.input },
         });
         this.notification.snackbar = true;
-        this.notification.massage =
-          "Data diri anda telah berhasil ditambahkan silahkan cek email anda";
+        this.notification.massage = "No antrian anda telah ditambahkan";
         this.$refs.form.reset();
       } else {
         this.notification.snackbar = true;
-        this.notification.massage =
-          "Data harus diisi dengan benar / data tidak boleh kosong";
+        this.notification.massage = "Maaf data tidak boleh kosong";
       }
     },
   },

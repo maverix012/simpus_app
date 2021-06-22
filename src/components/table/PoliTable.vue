@@ -18,17 +18,18 @@
           persistent
           max-width="500px"
         >
-          <!-- <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close"> Cancel </v-btn>
-              <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
-            </v-card-actions>
-          </v-card> -->
+          <v-card>
+            <v-toolbar color="teal accent-3">
+              <v-app-bar-nav-icon>
+                <v-btn fab small dark color="teal darken-2">
+                  <v-icon @click="dialog = false">mdi-close</v-icon>
+                </v-btn>
+              </v-app-bar-nav-icon>
+            </v-toolbar>
+            <v-card-text>
+              <component v-bind="menus" :is="selected" />
+            </v-card-text>
+          </v-card>
         </v-dialog>
         <!-- <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
@@ -81,6 +82,7 @@
 import { mapGetters } from "vuex";
 export default {
   data: () => ({
+    selected: "",
     dialog: false,
     dialogDelete: false,
     notification: {
@@ -89,10 +91,26 @@ export default {
       massage: null,
     },
     menus: [
-      { title: "Click Me" },
-      { title: "Click Me" },
-      { title: "Click Me" },
-      { title: "Click Me 2" },
+      {
+        title: "Data Rekam Medis",
+        component: () => import("../../views/subpages/Pasien/RekamMedis.vue"),
+      },
+      {
+        title: "Permintaan",
+        // component: () => import(""),
+      },
+      {
+        title: "Pemeriksaan",
+        // component: () => import(""),
+      },
+      {
+        title: "Rujukan",
+        // component: () => import(""),
+      },
+      {
+        title: "Cetak Kartu",
+        // component: () => import(""),
+      },
     ],
     headers: [
       { text: "Tindakan", value: "actions", sortable: false },
@@ -145,33 +163,28 @@ export default {
 
   methods: {
     editItem(item) {
-      this.editedIndex = this.antrian.indexOf(item);
-      this.editedItem = Object.assign({}, item);
       this.dialog = true;
+      this.selected = item.component;
     },
-    deleteItem(item) {
-      this.editedIndex = this.antrian.indexOf(item);
-      this.editedItem = Object.assign({}, item);
-      this.dialogDelete = true;
-    },
-    deleteItemConfirm() {
-      this.antrian.splice(this.editedIndex, 1);
-      this.closeDelete();
-    },
-    close() {
-      this.dialog = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
-    },
-    closeDelete() {
-      this.dialogDelete = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
-    },
+    // deleteItem(item) {
+    //   this.editedIndex = this.antrian.indexOf(item);
+    //   this.editedItem = Object.assign({}, item);
+    //   this.dialogDelete = true;
+    // },
+    // close() {
+    //   this.dialog = false;
+    //   this.$nextTick(() => {
+    //     this.editedItem = Object.assign({}, this.defaultItem);
+    //     this.editedIndex = -1;
+    //   });
+    // },
+    // closeDelete() {
+    //   this.dialogDelete = false;
+    //   this.$nextTick(() => {
+    //     this.editedItem = Object.assign({}, this.defaultItem);
+    //     this.editedIndex = -1;
+    //   });
+    // },
     save() {
       if (this.editedIndex > -1) {
         Object.assign(this.antrian[this.editedIndex], this.editedItem);

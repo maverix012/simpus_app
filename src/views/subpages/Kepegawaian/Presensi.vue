@@ -1,15 +1,15 @@
 <template>
   <v-container>
     <v-card>
-      <pegawai-table />
+      <presensi-table />
     </v-card>
   </v-container>
 </template>
 <script>
-import PegawaiTable from "../../../components/table/PegawaiTable";
+import PresensiTable from "../../../components/table/PresensiTable";
 export default {
   components: {
-    PegawaiTable,
+    PresensiTable,
   },
   data: () => ({}),
 };

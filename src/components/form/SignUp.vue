@@ -54,8 +54,58 @@
             label="Tempat Lahir"
             required
           />
+          <v-text-field
+            v-model="input.nama_ibu"
+            prepend-icon="fas fa-user"
+            label="Nama Ibu"
+            required
+          />
+          <v-text-field
+            v-model="input.alamat.jalan"
+            prepend-icon="fas fa-road"
+            label="Nama Jalan"
+            required
+          />
+          <v-text-field
+            v-model="input.alamat.rt"
+            prepend-icon="fas fa-house-user"
+            label="No. RT"
+            required
+          />
+          <v-text-field
+            v-model="input.alamat.rw"
+            prepend-icon="fas fa-house-user"
+            label="No. RW"
+            required
+          />
         </v-flex>
         <v-flex xs6>
+          <v-text-field
+            v-model="input.alamat.kel_des"
+            prepend-icon="fas fa-map-marked-alt"
+            label="Kelurahan / Desa"
+            required
+          />
+
+          <v-text-field
+            v-model="input.alamat.kecamatan"
+            prepend-icon="fas fa-map-marked-alt"
+            label="Kecamatan"
+            required
+          />
+          <v-text-field
+            v-model="input.alamat.kabupaten"
+            prepend-icon="fas fa-map-marked-alt"
+            label="Kabupaten"
+            required
+          />
+          <v-text-field
+            v-model="input.alamat.provinsi"
+            prepend-icon="fas fa-map-marked-alt"
+            label="Provinsi"
+            required
+          />
+
           <v-select
             v-model="input.jk"
             :items="dataSelect.jenis_kelamin"
@@ -149,12 +199,13 @@ export default {
       dob: null,
       pob: "",
       gol_darah: "",
+      nama_ibu: "",
       pekerjaan: "",
-      telepon: "",
+      no_telp: "",
       email: "",
       entryData: "",
       alamat: {
-        jln: "",
+        jalan: "",
         rt: null,
         rw: null,
         kel_des: "",
