@@ -12,6 +12,10 @@ const routes = [{
     component: () => import('../views/Menu.vue'),
   },
   {
+    path: '/absen',
+    component: () => import('../views/Absen.vue')
+  },
+  {
     path: '/dashboard',
     component: () => import('../views/Dashboard.vue')
   }, {
@@ -58,7 +62,7 @@ const routes = [{
   },
   {
     path: '/master_data',
-    component: () => import('../views/Bangunan.vue')
+    component: () => import('../views/MasterData.vue')
   },
 
   {

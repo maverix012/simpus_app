@@ -97,18 +97,22 @@ export default {
       },
       {
         title: "Permintaan",
-        // component: () => import(""),
+        component: () => import("../../views/subpages/Pasien/Permintaan.vue"),
       },
       {
         title: "Pemeriksaan",
-        // component: () => import(""),
+        component: () => import("../../views/subpages/Pasien/Pemeriksaan.vue"),
       },
       {
         title: "Rujukan",
-        // component: () => import(""),
+        component: () => import("../../views/subpages/Pasien/Rujukan.vue"),
       },
       {
         title: "Cetak Kartu",
+        // component: () => import(""),
+      },
+      {
+        title: "Surat",
         // component: () => import(""),
       },
     ],

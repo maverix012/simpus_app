@@ -10,7 +10,14 @@
         <v-toolbar-title>Pegawai</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <v-dialog v-model="popUp.addPegawai" persistent max-width="500px">
+        <v-dialog
+          v-model="popUp.addPegawai"
+          persistent
+          fullscreen
+          hide-overlay
+          transition="dialog-bottom-transition"
+          max-width="500px"
+        >
           <template v-slot:activator="{ on, attrs }">
             <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
               Tambah Pegawai
@@ -33,7 +40,7 @@
             </v-card-text>
           </v-card>
         </v-dialog>
-        <v-dialog v-model="popUp.detailPegawai" max-width="500px">
+        <v-dialog v-model="popUp.detailPegawai" max-width="500px" fullscreen>
           <v-card>
             <v-card-title class="headline"></v-card-title>
 

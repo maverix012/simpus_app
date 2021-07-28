@@ -45,12 +45,12 @@ export default {
       {
         icon: "fas fa-box",
         text: "Obat Masuk",
-        component: () => import("./subpages/Kefarmasian/Obat"),
+        component: () => import("./subpages/Kefarmasian/ObatMasuk.vue"),
       },
       {
         icon: "fas fa-truck-loading",
         text: "Obat Keluar",
-        component: () => import("./subpages/Kefarmasian/Obat"),
+        component: () => import("./subpages/Kefarmasian/ObatKeluar.vue"),
       },
     ],
   }),
