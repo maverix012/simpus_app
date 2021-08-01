@@ -1,73 +1,51 @@
 <template>
-  <video autoplay muted />
-
-  <!-- <v-col cols="4">
-        <transition
-          enter-active-class="animated fadeInDown"
-          leave-active-class="animated fadeOutDown"
-        >
-          <v-card v-if="show" shaped color="green">
-            <v-list-item three-line>
-              <v-list-item-content>
-                <v-list-item-title class="font-weight-bold"
-                  >Galih Prasetiyo, S.Kom</v-list-item-title
-                >
-                <v-list-item-content class="font-weight-black">
-                  <h1>SIKDA</h1>
-                </v-list-item-content>
-                <v-list-item-subtitle class="headline font-weight-black"
-                  >08.00 WIB</v-list-item-subtitle
-                >
-              </v-list-item-content>
-              <v-list-item-avatar tile width="120" height="140">
-                <img tile src="../../../public/img/foto/Galih.jpg" />
-              </v-list-item-avatar>
-            </v-list-item>
-          </v-card>
-        </transition>
-      </v-col> -->
+  <div class="media">
+    <video muted loop playsinline @loadedmetadata="startDetection"></video>
+    <canvas />
+  </div>
 </template>
-
 <script>
 import * as faceapi from "face-api.js";
 export default {
   data: () => ({
-    show: false,
+    videoEl: null,
+    canvasEl: null,
+    timeout: 0,
   }),
   mounted() {
-    Promise.all([
-      faceapi.nets.tinyFaceDetector.loadFromUri("/models"),
-      faceapi.nets.faceLandmark68Net.loadFromUri("/models"),
-      faceapi.nets.faceRecognitionNet.loadFromUri("/models"),
-      //   faceapi.nets.faceExpressionNet.loadFromUri("/models"),
-      faceapi.nets.ssdMobilenetv1.loadFromUri("/models"),
-    ]).then(this.startVideo());
+    this.init();
+    this.startVideo();
   },
-
   methods: {
+    async init() {
+      await faceapi.nets.tinyFaceDetector.loadFromUri("/models");
+      this.videoEl = document.querySelector("video");
+      this.canvasEl = document.querySelector("canvas");
+    },
     startVideo() {
-      const video = document.querySelector("video");
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices
-          .getUserMedia({ audio: false, video: true })
-          .then((stream) => {
-            video.srcObject = stream;
-            video.play();
-          });
-
-        setInterval(async () => {
-          const detections = await faceapi.detectAllFaces(
-            video,
-            new faceapi.TinyFaceDetectorOptions()
-          );
-          console.log(detections);
-          if (detections.length !== 0) {
-            this.show = true;
-          } else {
-            this.show = false;
-          }
-        }, 500);
+      navigator.mediaDevices.getUserMedia({ video: true }).then((stream) => {
+        this.videoEl.srcObject = stream;
+        this.videoEl.play();
+      });
+    },
+    async startDetection() {
+      const result = await faceapi.detectAllFaces(
+        this.videoEl,
+        new faceapi.TinyFaceDetectorOptions({
+          minFaceSize: 20, // 0.1 ~ 0.9
+          scaleFactor: 0.709, // 0.1 ~ 0.9
+        })
+      );
+      if (result && !this.videoEl.paused) {
+        const dims = faceapi.matchDimensions(this.canvasEl, this.videoEl, true);
+        const resizeResults = faceapi.resizeResults(result, dims);
+        faceapi.draw.drawDetections(this.canvasEl, resizeResults);
+      } else {
+        this.canvasEl
+          .getContext("2d")
+          .clearRect(0, 0, this.canvasEl.width, this.canvasEl.height);
       }
+      this.timeout = setTimeout(() => this.startDetection());
     },
   },
 };
@@ -75,11 +53,21 @@ export default {
 <style scoped>
 video {
   -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
   transform: scaleX(-1);
 }
-canvas {
-  /* position: absolute; */
+.media {
+  position: relative;
+}
+.media canvas {
   -webkit-transform: scaleX(-1);
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
   transform: scaleX(-1);
+
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>

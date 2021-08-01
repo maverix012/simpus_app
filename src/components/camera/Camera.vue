@@ -2,7 +2,7 @@
   <v-main>
     <video autoplay v-show="!isPhotoTaken" />
     <canvas v-show="isPhotoTaken" />
-    <v-container class="d-flex justify-center mb-6">
+    <v-layout class="d-flex justify-center mb-6">
       <v-btn
         fab
         v-show="!isPhotoTaken"
@@ -19,7 +19,7 @@
         color="blue"
         ><v-icon dark> mdi-close </v-icon></v-btn
       >
-    </v-container>
+    </v-layout>
   </v-main>
 </template>
 <script>
